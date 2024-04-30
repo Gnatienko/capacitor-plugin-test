@@ -1,0 +1,18 @@
+npx create-react-app my-app
+
+capasitor app -------
+npm install @capacitor/core @capacitor/cli @capacitor/android
+npx cap init
+npm run build
+npx cap add android
+
+sync---
+npm run build
+npx cap sync android
+
+npx cap open android
+
+plugin ------
+npm init @capacitor/plugin
+npm install ./hello-plugin
+npm i

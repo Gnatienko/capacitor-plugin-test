@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react"
+import { Plugins } from "@capacitor/core"
+
+const { Elavon } = Plugins
 
 function App() {
+  const [message, setMessage] = useState("") // Состояние для хранения сообщения от плагина
+
+  useEffect(() => {
+    Elavon.echo({ value: "Hello, world!" })
+      .then((response) => {
+        // Сохраняем полученное сообщение в состояние
+        setMessage(response.value)
+      })
+      .catch((error) => {
+        // В случае ошибки выводим сообщение об ошибке
+        setMessage(`Error: ${error.message}`)
+      })
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {/* Отображаем сообщение на экране */}
+        Message from plugin: {message}
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
